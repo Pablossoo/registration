@@ -6,9 +6,9 @@ use App\Account\Application\Query\UserQuery;
 use App\Account\Domain\User\User;
 use Symfony\Contracts\Cache\CacheInterface;
 
-class CacheUserRepository implements UserQuery
+readonly class CacheUserRepository implements UserQuery
 {
-    public function __construct(private readonly CacheInterface $cache, private readonly UserQuery $userQuery)
+    public function __construct(private CacheInterface $cache, private UserQuery $userQuery)
     {
 
     }
