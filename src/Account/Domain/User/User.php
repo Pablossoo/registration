@@ -13,26 +13,31 @@ final class User
 {
     private UuidInterface $id;
 
-    private readonly string $login;
+    public readonly string $login;
 
-    private readonly string $password;
+    public readonly string $password;
 
-    private readonly string $name;
+    public readonly string $name;
 
-    private readonly string $username;
+    public readonly string $username;
 
-    private readonly Pesel $pesel;
+    public readonly Pesel $pesel;
 
-    private readonly Nip $nip;
+    public readonly Nip $nip;
 
     public function __construct(string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip)
     {
         $this->id = Uuid::uuid4();
         $this->login = $login;
-        $this->password = $password;
+        $this->password = $this->hashPassword($password);
         $this->name = $name;
         $this->username = $username;
         $this->pesel = $pesel;
         $this->nip = $nip;
+    }
+
+    private function hashPassword(string $password): string
+    {
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 }
