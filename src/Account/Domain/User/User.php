@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Account\Domain\User;
 
-use App\Account\Domain\User\Event\Collector\EventCollector;
 use App\Account\Domain\User\Event\UserEvent;
 use App\Account\Domain\User\ValueObject\Nip;
 use App\Account\Domain\User\ValueObject\Pesel;
-use App\Contract\EventCollectorInterface;
-
 
 final class User
 {
+    use EventCollector;
+
     private string $id;
 
     public readonly string $login;
@@ -29,8 +28,6 @@ final class User
 
     public bool $status;
 
-    public readonly EventCollectorInterface $eventCollector;
-
     public function __construct(string $id, string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip, bool $status)
     {
         $this->id = $id;
@@ -41,7 +38,6 @@ final class User
         $this->pesel = $pesel;
         $this->nip = $nip;
         $this->status = $status;
-        $this->eventCollector = new EventCollector();
     }
 
     private function hashPassword(string $password): string
@@ -52,18 +48,18 @@ final class User
     public function activeUser(): void
     {
         $this->status = true;
-        $this->eventCollector->addEvent(new UserEvent($this->id, new \DateTime()));
+        $this->addEvent(new UserEvent($this->id, new \DateTime()));
     }
 
     public function deactivateUser(): void
     {
         $this->status = false;
-        $this->eventCollector->addEvent(new UserEvent($this->id, new \DateTime()));
+        $this->addEvent(new UserEvent($this->id, new \DateTime()));
     }
 
     public static function createUser(string $id, string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip, bool $status): User
     {
-        return new self(
+        $user = new self(
             $id,
             $login,
             $password,
@@ -73,5 +69,8 @@ final class User
             $nip,
             $status
         );
+        self::addEvent(new UserEvent($id, new \DateTime()));
+
+        return $user;
     }
 }
