@@ -2,7 +2,17 @@
 
 namespace App\Application\Command;
 
-class CreateUser
+final readonly class CreateUser
 {
-  public string $id;
+    public string $login;
+
+    public string $password;
+
+    public string $name;
+
+    public string $username;
+
+    public string $pesel;
+
+    public string $nip;
 }
