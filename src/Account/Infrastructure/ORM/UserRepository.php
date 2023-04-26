@@ -46,8 +46,10 @@ final readonly class UserRepository implements UseRepository, UserQuery
     public function getUserByUuid(string $id): User
     {
         $user = $this->entityManager->createQueryBuilder()
+            ->select('u')
+            ->from('App\Account\Domain\User\User', 'u')
             ->where('u.id = :id')
-            ->setParameter(':id', $id)
+            ->setParameter('id', $id)
             ->getQuery()->getOneOrNullResult();
 
         if ($user === null) {
