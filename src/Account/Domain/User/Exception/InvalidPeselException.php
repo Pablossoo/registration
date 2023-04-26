@@ -2,9 +2,9 @@
 
 namespace App\Account\Domain\User\Exception;
 
-class InvalidPeselException extends \Exception
+final class InvalidPeselException extends \Exception
 {
-   public static function invalidPeselException(string $nip) {
+   public static function invalidPeselException(string $nip): self {
        return new self(sprintf('Invalid Pesel number %s ,should contains 11 character', $nip));
    }
 }

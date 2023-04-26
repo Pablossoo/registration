@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Account\Domain\ValueObject;
+namespace App\Account\Domain\User\ValueObject;
 
 use App\Account\Domain\User\Exception\InvalidPeselException;
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Account\Domain\User;
 
-use App\Account\Domain\ValueObject\Nip;
-use App\Account\Domain\ValueObject\Pesel;
+use App\Account\Domain\User\ValueObject\Nip;
+use App\Account\Domain\User\ValueObject\Pesel;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
