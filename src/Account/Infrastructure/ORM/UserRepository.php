@@ -11,8 +11,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final readonly class UserRepository implements \App\Account\Domain\User\UserRepository, UserQuery
 {
-    public function __construct(private EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     public function save(User $user): void
@@ -25,7 +26,8 @@ final readonly class UserRepository implements \App\Account\Domain\User\UserRepo
     {
         return $this->entityManager->createQueryBuilder()
             ->orderBy('u.id', 'ASC')
-            ->getQuery()->getResult();
+            ->getQuery()
+            ->getResult();
     }
 
     public function getLastCreatedUser(): User
@@ -33,7 +35,8 @@ final readonly class UserRepository implements \App\Account\Domain\User\UserRepo
         $user = $this->entityManager->createQueryBuilder()
             ->setMaxResults(1)
             ->orderBy('u.id', 'DESC')
-            ->getQuery()->getOneOrNullResult();
+            ->getQuery()
+            ->getOneOrNullResult();
 
         if ($user === null) {
             throw new NotFoundHttpException('User not Found');
@@ -46,10 +49,11 @@ final readonly class UserRepository implements \App\Account\Domain\User\UserRepo
     {
         $user = $this->entityManager->createQueryBuilder()
             ->select('u')
-            ->from('App\Account\Domain\User\User', 'u')
+            ->from(\App\Account\Domain\User\User::class, 'u')
             ->where('u.id = :id')
             ->setParameter('id', $id)
-            ->getQuery()->getOneOrNullResult();
+            ->getQuery()
+            ->getOneOrNullResult();
 
         if ($user === null) {
             throw new NotFoundHttpException('User not Found');
@@ -62,10 +66,11 @@ final readonly class UserRepository implements \App\Account\Domain\User\UserRepo
     {
         $user = $this->entityManager->createQueryBuilder()
             ->select('u')
-            ->from('App\Account\Domain\User\User', 'u')
+            ->from(\App\Account\Domain\User\User::class, 'u')
             ->where('u.login = :login')
             ->setParameter(':login', $login)
-            ->getQuery()->getOneOrNullResult();
+            ->getQuery()
+            ->getOneOrNullResult();
 
         if ($user === null) {
             throw new NotFoundHttpException('User not Found');
@@ -73,6 +78,4 @@ final readonly class UserRepository implements \App\Account\Domain\User\UserRepo
 
         return $user;
     }
-
-
 }

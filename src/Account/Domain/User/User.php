@@ -12,8 +12,6 @@ final class User
 {
     use EventCollector;
 
-    private string $id;
-
     public readonly string $login;
 
     public readonly string $password;
@@ -28,21 +26,26 @@ final class User
 
     public bool $status;
 
-    public function __construct(string $id, string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip, bool $status)
-    {
-        $this->id = $id;
-        $this->login = $login;
-        $this->password = $this->hashPassword($password);
-        $this->name = $name;
-        $this->username = $username;
-        $this->pesel = $pesel;
-        $this->nip = $nip;
-        $this->status = $status;
-    }
+    private string $id;
 
-    private function hashPassword(string $password): string
-    {
-        return password_hash($password, PASSWORD_BCRYPT);
+    public function __construct(
+        string $id,
+        string $login,
+        string $password,
+        string $name,
+        string $username,
+        Pesel $pesel,
+        Nip $nip,
+        bool $status
+    ) {
+        $this->id       = $id;
+        $this->login    = $login;
+        $this->password = $this->hashPassword($password);
+        $this->name     = $name;
+        $this->username = $username;
+        $this->pesel    = $pesel;
+        $this->nip      = $nip;
+        $this->status   = $status;
     }
 
     public function activeUser(): void
@@ -57,18 +60,17 @@ final class User
         $this->addEvent(new UserEvent($this->id, new \DateTime()));
     }
 
-    public static function createUser(string $id, string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip, bool $status): User
-    {
-        $user = new self(
-            $id,
-            $login,
-            $password,
-            $name,
-            $username,
-            $pesel,
-            $nip,
-            $status
-        );
+    public static function createUser(
+        string $id,
+        string $login,
+        string $password,
+        string $name,
+        string $username,
+        Pesel $pesel,
+        Nip $nip,
+        bool $status
+    ): self {
+        $user = new self($id, $login, $password, $name, $username, $pesel, $nip, $status);
         self::addEvent(new UserEvent($id, new \DateTime()));
 
         return $user;
@@ -76,6 +78,11 @@ final class User
 
     public function getEvents(): array
     {
-       return self::$events;
+        return self::$events;
+    }
+
+    private function hashPassword(string $password): string
+    {
+        return \password_hash($password, PASSWORD_BCRYPT);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Account\Application\Query;
 
 use App\Account\Domain\User\User;
@@ -11,5 +13,6 @@ interface UserQuery
     public function getLastCreatedUser(): User;
 
     public function getUserByUuid(string $id): User;
+
     public function getUserByLogin(string $login): User;
 }

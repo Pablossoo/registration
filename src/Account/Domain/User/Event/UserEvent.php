@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Account\Domain\User\Event;
 
 use App\Contract\EventInterface;
 
-class UserEvent implements EventInterface
+final class UserEvent implements EventInterface
 {
     public readonly string $id;
 
@@ -12,7 +14,7 @@ class UserEvent implements EventInterface
 
     public function __construct(string $id, \DateTimeInterface $created)
     {
-        $this->id = $id;
+        $this->id      = $id;
         $this->created = $created;
     }
 }
