@@ -2,11 +2,9 @@
 
 namespace App\Account\Application\Command;
 
-final readonly class DeactiveUser
+final readonly class DeactivateUser
 {
     public string $login;
-    public string $active;
-
 
     public function __construct(string $login)
     {

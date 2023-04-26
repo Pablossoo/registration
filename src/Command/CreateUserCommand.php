@@ -3,7 +3,7 @@
 namespace App\Command;
 
 use App\Account\Application\Command\CreateUser;
-use App\Account\Application\Command\DeactiveUser;
+use App\Account\Application\Command\DeactivateUser;
 use Ramsey\Uuid\Rfc4122\UuidV4;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,7 +29,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
         $uuid = UuidV4::uuid4();
 //        $this->messageBus->dispatch(new CreateUser($uuid->toString(),'rrr', 'test','test2', 'test3', '12345678910', '1234567891', true));
-        $this->messageBus->dispatch(new DeactiveUser('rrr'));
+        $this->messageBus->dispatch(new DeactivateUser('rrr'));
         $io->success('User has been created');
 
         return Command::SUCCESS;
