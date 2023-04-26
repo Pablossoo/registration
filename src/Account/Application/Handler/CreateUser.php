@@ -24,7 +24,8 @@ final readonly class CreateUser
             $createUserCommand->name,
             $createUserCommand->username,
             new Pesel($createUserCommand->pesel),
-            new Nip($createUserCommand->nip)
+            new Nip($createUserCommand->nip),
+            $createUserCommand->status
         );
         $this->useRepository->save($user);
     }

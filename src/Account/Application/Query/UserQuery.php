@@ -10,5 +10,6 @@ interface UserQuery
 
     public function getLastCreatedUser(): User;
 
-    public function getUserById(int $id): User;
+    public function getUserByUuid(string $id): User;
+    public function getUserByLogin(string $login): User;
 }

@@ -43,7 +43,7 @@ final readonly class UserRepository implements UseRepository, UserQuery
         return $user;
     }
 
-    public function getUserById(int $id): User
+    public function getUserByUuid(string $id): User
     {
         $user = $this->entityManager->createQueryBuilder()
             ->where('u.id = :id')
@@ -56,4 +56,22 @@ final readonly class UserRepository implements UseRepository, UserQuery
 
         return $user;
     }
+
+    public function getUserByLogin(string $login): User
+    {
+        $user = $this->entityManager->createQueryBuilder()
+            ->select('u')
+            ->from('App\Account\Domain\User\User', 'u')
+            ->where('u.login = :login')
+            ->setParameter(':login', $login)
+            ->getQuery()->getOneOrNullResult();
+
+        if ($user === null) {
+            throw new NotFoundHttpException('User not Found');
+        }
+
+        return $user;
+    }
+
+
 }

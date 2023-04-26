@@ -24,7 +24,9 @@ final class User
 
     public readonly Nip $nip;
 
-    public function __construct(string $id, string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip)
+    public bool $status;
+
+    public function __construct(string $id, string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip, bool $status)
     {
         $this->id = $id;
         $this->login = $login;
@@ -33,10 +35,21 @@ final class User
         $this->username = $username;
         $this->pesel = $pesel;
         $this->nip = $nip;
+        $this->status = $status;
     }
 
     private function hashPassword(string $password): string
     {
         return password_hash($password, PASSWORD_BCRYPT);
+    }
+
+    public function activeUser(): void
+    {
+        $this->status = true;
+    }
+
+    public function deactiveUser(): void
+    {
+        $this->status = false;
     }
 }

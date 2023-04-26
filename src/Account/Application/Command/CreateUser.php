@@ -17,7 +17,9 @@ final readonly class CreateUser
 
     public string $nip;
 
-    public function __construct(string $id, string $login, string $password, string $name, string $username, string $pesel, string $nip)
+    public bool $status;
+
+    public function __construct(string $id, string $login, string $password, string $name, string $username, string $pesel, string $nip, bool $status)
     {
         $this->id = $id;
         $this->login = $login;
@@ -26,5 +28,6 @@ final readonly class CreateUser
         $this->username = $username;
         $this->pesel = $pesel;
         $this->nip = $nip;
+        $this->status = $status;
     }
 }
