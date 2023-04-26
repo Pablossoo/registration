@@ -14,8 +14,8 @@ doctrine:
             User:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/Mapping'
-                prefix: 'App\Domain\User'
+                dir: '%kernel.project_dir%/src/Account/Infrastructure/Mapping'
+                prefix: 'App\Account\Domain\User'
                 alias: Domain\Model
 when@test:
     doctrine:
