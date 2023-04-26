@@ -12,8 +12,8 @@
         <field name="password" length="255" column="password"/>
         <field name="name" length="255" column="name"/>
         <field name="username" length="255" column="username"/>
-        <embedded name="nip" class="App\Account\Domain\User\ValueObject\Nip"/>
-        <embedded name="pesel" class="App\Account\Domain\User\ValueObject\Pesel"/>
+        <embedded name="nip" class="App\Account\Domain\User\ValueObject\Nip" use-column-prefix="false"/>
+        <embedded name="pesel" class="App\Account\Domain\User\ValueObject\Pesel" use-column-prefix="false"/>
     </entity>
 
 </doctrine-mapping>
