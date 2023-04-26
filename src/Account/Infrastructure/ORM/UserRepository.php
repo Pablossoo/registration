@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Account\Infrastructure\ORM;
 
+use App\Account\Application\Query\UserQuery;
 use App\Account\Domain\User\User;
 use App\Account\Domain\User\UseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-final readonly class UserRepository implements UseRepository
+final readonly class UserRepository implements UseRepository, UserQuery
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {
@@ -19,4 +20,18 @@ final readonly class UserRepository implements UseRepository
         $this->entityManager->flush();
     }
 
+    public function getUsersCollection(): array
+    {
+        // TODO: Implement getUsersCollection() method.
+    }
+
+    public function getLastCreatedUser(): User
+    {
+        // TODO: Implement getLastCreatedUser() method.
+    }
+
+    public function getUserById(int $id): User
+    {
+        // TODO: Implement getUserById() method.
+    }
 }
