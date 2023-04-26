@@ -12,9 +12,4 @@ trait EventCollector
     {
         self::$events [] = $event;
     }
-
-    private static function getEvents(): array
-    {
-        return self::$events;
-    }
 }

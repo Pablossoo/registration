@@ -31,7 +31,7 @@ final readonly class CreateUser
 
         //tutaj powinna być jakąś obsługa transakcji, jeżeli jest w porzadku to wypuszczamy eventy dalej
 
-        foreach ($user->eventCollector->getEvents() as $event) {
+        foreach ($user->getEvents() as $event) {
             $this->eventDispatcher()->publish($event);
         }
     }

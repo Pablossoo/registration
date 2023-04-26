@@ -73,4 +73,9 @@ final class User
 
         return $user;
     }
+
+    public function getEvents(): array
+    {
+       return self::$events;
+    }
 }
