@@ -6,11 +6,10 @@ namespace App\Account\Infrastructure\ORM;
 
 use App\Account\Application\Query\UserQuery;
 use App\Account\Domain\User\User;
-use App\Account\Domain\User\UseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final readonly class UserRepository implements UseRepository, UserQuery
+final readonly class UserRepository implements \App\Account\Domain\User\UserRepository, UserQuery
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {

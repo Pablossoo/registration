@@ -2,7 +2,7 @@
 
 namespace App\Account\Domain\User;
 
-interface UseRepository
+interface UserRepository
 {
     public function save(User $user): void;
 }
