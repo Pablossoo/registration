@@ -6,12 +6,11 @@ namespace App\Account\Domain\User;
 
 use App\Account\Domain\User\ValueObject\Nip;
 use App\Account\Domain\User\ValueObject\Pesel;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+
 
 final class User
 {
-    private UuidInterface $id;
+    private string $id;
 
     public readonly string $login;
 
@@ -25,9 +24,9 @@ final class User
 
     public readonly Nip $nip;
 
-    public function __construct(string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip)
+    public function __construct(string $id, string $login, string $password, string $name, string $username, Pesel $pesel, Nip $nip)
     {
-        $this->id = Uuid::uuid4();
+        $this->id = $id;
         $this->login = $login;
         $this->password = $this->hashPassword($password);
         $this->name = $name;
