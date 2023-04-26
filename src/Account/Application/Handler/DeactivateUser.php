@@ -17,7 +17,7 @@ final readonly class DeactivateUser
     public function __invoke(\App\Account\Application\Command\DeactivateUser $deactivateUserCommand): void
     {
         $user = $this->userRepository->getUserByLogin($deactivateUserCommand->login);
-        $user->deactiveUser();
+        $user->deactivateUser();
         $this->userRepository->save($user);
     }
 }
