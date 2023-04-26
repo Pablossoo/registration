@@ -48,7 +48,7 @@ final class User
         $this->status = true;
     }
 
-    public function deactiveUser(): void
+    public function deactivateUser(): void
     {
         $this->status = false;
     }
